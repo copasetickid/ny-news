@@ -1,0 +1,22 @@
+{
+  "name": "ny-news",
+  "version": "1.0.0",
+  "description": "stories, headlines, summaries and photos about New York.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/copasetickid/ny-news.git"
+  },
+  "author": "Rushaine McBean",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/copasetickid/ny-news/issues"
+  },
+  "homepage": "https://github.com/copasetickid/ny-news#readme",
+  "dependencies": {
+    "hapi": "^13.1.0"
+  }
+}
