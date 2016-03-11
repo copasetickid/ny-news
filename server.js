@@ -1,7 +1,8 @@
 'use strict';
 
 const Hapi = require('hapi'),
-      server = new Hapi.Server();
+      server = new Hapi.Server(),
+      Request = require('request');
 
 
 server.connection({port: 3000});
@@ -28,7 +29,15 @@ server.route({
   method: 'GET',
   path: '/',
   handler: function (request, reply) {
-    reply.view('articles/index', { title: 'Articles', body: 'Article Body' });
+
+    Request('http://np-ec2-nytimes-com.s3.amazonaws.com/dev/test/nyregion2.js', function(error, response, body) {
+      var jsonResponse = JSON.parse(body);
+      //console.log(jsonResponse.page);
+      reply.view('articles/index', { title: 'Articles', body: 'Article Body', pageParameters: jsonResponse.page.parameters});
+    })
+
+
+    //reply.view('articles/index', { title: 'Articles', body: 'Article Body' });
   }
 });
 
