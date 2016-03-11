@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/copasetickid/ny-news#readme",
   "dependencies": {
-    "hapi": "^13.1.0"
+    "handlebars": "^4.0.5",
+    "hapi": "^13.1.0",
+    "vision": "^4.0.1"
   }
 }
