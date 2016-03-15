@@ -1,11 +1,27 @@
 'use strict';
 
 const Hapi = require('hapi'),
-      server = new Hapi.Server(),
+      Path = require('path'),
+      Inert = require('inert'),
       Request = require('request');
 
 
+
+
+const server = new Hapi.Server({
+        connections: {
+        routes: {
+          files: {
+                relativeTo: Path.join(__dirname, 'public/..')
+              }
+            }
+        }
+      });
+
+
 server.connection({port: 3000});
+
+
 
 //View Engine
 server.register(require('vision'), (err) => {
@@ -37,15 +53,36 @@ server.route({
     })
 
 
-    //reply.view('articles/index', { title: 'Articles', body: 'Article Body' });
-  }
-});
 
-//Starts the server
-server.start( (err) => {
-  if(err) {
-    throw err;
-  }
+      //reply.view('articles/index', { title: 'Articles', body: 'Article Body' });
+    }
+  });
 
-  console.log('Server running at: ', server.info.uri);
-});
+  server.register(Inert, (err) => {
+
+    if (err) {
+        throw err;
+    }
+
+    server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+        directory: {
+            path: 'public'
+        }
+      }
+    });
+  });
+
+
+  //Starts the server
+  server.start( (err) => {
+    if(err) {
+      throw err;
+    }
+
+    console.log('Server running at: ', server.info.uri);
+  });
+
+

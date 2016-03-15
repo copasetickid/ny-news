@@ -1,21 +1,17 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    hapi: {
-      custom_options: {
-        options: {
-          server: require('path').resolve('server')
+     sass: {                              // Task
+      dist: {                            // Target
+        options: {                       // Target options
+          style: 'expanded'
+        },
+        files: {                         // Dictionary of files
+          'public/main.css': 'src/stylesheets/main.scss'       // 'destination': 'source'
         }
       }
     },
-    jshint: {
-      files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
-      options: {
-        globals: {
-          jQuery: true
-        }
-      }
-    },
+
     watch: {
       files: ['<%= jshint.files %>'],
       tasks: ['jshint', 'hapi'],
@@ -28,7 +24,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-hapi');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
-  grunt.registerTask('default', ['hapi', 'watch']);
+  grunt.registerTask('default', ['sass']);
 
 };
