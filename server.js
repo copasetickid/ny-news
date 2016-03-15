@@ -34,8 +34,8 @@ server.register(require('vision'), (err) => {
       relativeTo: __dirname,
       path: './src/templates',
       layoutPath: './src/templates/layouts',
-      layout: true
-
+      layout: true,
+      helpersPath: './src/templates/helpers',
   });
 });
 
