@@ -36,22 +36,39 @@ server.register(require('vision'), (err) => {
       layoutPath: './src/templates/layouts',
       layout: true,
       helpersPath: './src/templates/helpers',
+      partialsPath: 'src/templates/partials'
   });
 });
 
 
-//Route Defintions
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: function (request, reply) {
 
-    Request('http://np-ec2-nytimes-com.s3.amazonaws.com/dev/test/nyregion2.js', function(error, response, body) {
-      var jsonResponse = JSON.parse(body);
-      //console.log(jsonResponse.page);
-      reply.view('articles/index', { title: 'Articles', body: 'Article Body', pageParameters: jsonResponse.page.parameters});
-    })
+  //Route Defintions
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: function (request, reply) {
 
+      Request('http://np-ec2-nytimes-com.s3.amazonaws.com/dev/test/nyregion2.js', function(error, response, body) {
+        var jsonResponse = JSON.parse(body);
+        //console.log(jsonResponse.page);
+        var aColumn, bColumn;
+
+        for (var n =0; n < jsonResponse.page.content.length; n++) {
+          if (jsonResponse.page.content[n].name === 'aColumn') {
+            aColumn = jsonResponse.page.content[n];
+          }
+          if (jsonResponse.page.content[n].name === 'bColumn') {
+            bColumn = jsonResponse.page.content[n];
+          }
+        }
+
+        reply.view('articles/index',
+          {
+            title: 'Articles', body: 'Article Body', pageParameters: jsonResponse.page.parameters,
+            aColumn: aColumn, bColumn: bColumn
+          }
+        );
+      })
 
 
       //reply.view('articles/index', { title: 'Articles', body: 'Article Body' });
