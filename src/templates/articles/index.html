@@ -7,43 +7,14 @@
   {{#if aColumn}}
   <div class='column'>
     <h1>Column A</h1>
-      {{#each aColumn.collections as |article|}}
-          {{#each article.assets as |item|}}
-            <div class="article-content">
-               <h2>{{item.headline}}</h2>
-               <span>{{item.byline}}   {{format-date item.lastPublished}}</span>
-               <p>{{item.summary}}</p>
-                {{#if item.images}}
-                  {{#each item.images}}
-
-                    <img src="{{image-src this}}">
-
-                  {{/each}}
-
-                {{/if}}
-
-
-
-            </div>
-          {{/each}}
-      {{/each}}
+      {{> article articleColumn=aColumn }}
   </div>
   {{/if}}
 
   {{#if bColumn}}
-  <div class='column'>
-    <h1>Column B</h1>
-      {{#each bColumn.collections as |article|}}
-         {{#if article.assets}}
-            {{#each article.assets}}
-            <div class="article-content">
-                <h2>{{this.headline}}</h2>
-               <span>{{this.byline}}</span>
-               <p>{{this.summary}}</p>
-            </div>
-            {{/each}}
-         {{/if}}
-      {{/each}}
-  </div>
+    <div class='column'>
+      <h1>Column B</h1>
+      {{> article articleColumn=bColumn}}
+    </div>
   {{/if}}
 </div>
