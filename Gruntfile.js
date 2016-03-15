@@ -1,6 +1,16 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+    browserify: {
+      dist: {
+        options: {
+          transform: [['babelify', { presets: ['es2015', 'react'] }]]
+        },
+        src: ['src/scripts/app.js'],
+        dest: 'public/ny-news.js',
+      }
+    },
+
      sass: {                              // Task
       dist: {                            // Target
         options: {                       // Target options
@@ -11,12 +21,10 @@ module.exports = function(grunt) {
         }
       }
     },
-
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint', 'hapi'],
-      options: {
-        spawn: false
+      browserify: {
+        files: ['src/scripts/**/*.js'],
+        tasks: [ 'browserify']
       }
     }
   });
@@ -25,7 +33,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-hapi');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('default', ['sass']);
+  grunt.registerTask('default', ['sass', 'browserify']);
 
 };
