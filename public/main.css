@@ -1,5 +1,42 @@
-.main .main2 {
-  background-color: blue;
+body {
+  font-family: georgia;
+}
+
+h1, h2 {
+  font-style: italic;
+  font-weight: bold;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+header {
+  text-align: center;
+  border-bottom: 1px solid darkgrey;
+  padding-bottom: 9px;
+}
+
+.article-container {
+  width: 100%;
+  padding: 0 10px;
+}
+.article-container .article-content {
+  display: inline-block;
+  width: 30%;
+  height: auto;
+  border: 1px solid darkgray;
+  margin: 5px;
+  padding: 5px;
+  vertical-align: top;
+}
+.article-container .article-details p {
+  display: inline-block;
+  max-width: 75%;
+}
+.article-container .article-details img {
+  width: 75px;
+  vertical-align: top;
 }
 
 /*# sourceMappingURL=main.css.map */
