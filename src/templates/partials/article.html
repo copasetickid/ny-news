@@ -1,20 +1,16 @@
 {{#each articleColumn.collections as |article|}}
-          {{#each article.assets as |item|}}
-            <div class="article-content">
-               <h2>{{item.headline}}</h2>
-               <span>{{item.byline}}   {{format-date item.lastPublished}}</span>
-               <p>{{item.summary}}</p>
-                {{#if item.images}}
-                  {{#each item.images}}
-
-                    <img src="{{image-src this}}">
-
-                  {{/each}}
-
-                {{/if}}
-
-
-
-            </div>
+  {{#each article.assets as |item|}}
+    <div class="article-content">
+      <h2 class="article-headline">{{item.headline}}</h2>
+      <span>{{item.byline}}</span>
+      <div class="article-details">
+        <p>{{item.summary}}</p>
+        {{#if item.images}}
+          {{#each item.images}}
+            <img src="{{image-src this}}">
           {{/each}}
+        {{/if}}
+       </div>
+    </div>
+  {{/each}}
 {{/each}}

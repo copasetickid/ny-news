@@ -1,20 +1,23 @@
 <header>
   <h1>{{pageParameters.displayName}}</h1>
   <span>{{pageParameters.description}}</span>
+  <button class="js-toggle-language" data-lang="en">Translate</button>
 </header>
+
 
 <div class="article-container">
   {{#if aColumn}}
-  <div class='column'>
-    <h1>Column A</h1>
-      {{> article articleColumn=aColumn }}
-  </div>
+
+    {{> article articleColumn=bColumn}}
+
   {{/if}}
 
   {{#if bColumn}}
-    <div class='column'>
-      <h1>Column B</h1>
-      {{> article articleColumn=bColumn}}
-    </div>
+    {{> article articleColumn=bColumn}}
   {{/if}}
+
+  {{#if cColumn}}
+    {{> article articleColumn=cColumn}}
+  {{/if}}
+
 </div>
